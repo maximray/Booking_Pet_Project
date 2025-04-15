@@ -1,0 +1,26 @@
+[
+    {
+      "id": 97,
+      "room_id": 1,
+      "user_id": 1,
+      "date_from": "2025-05-12",
+      "date_to": "2025-05-18",
+      "price": 4300
+    },
+    {
+      "id": 98,
+      "room_id": 1,
+      "user_id": 1,
+      "date_from": "2025-05-12",
+      "date_to": "2025-05-18",
+      "price": 4300
+    },
+    {
+      "id": 99,
+      "room_id": 2,
+      "user_id": 2,
+      "date_from": "2025-05-12",
+      "date_to": "2025-05-18",
+      "price": 4300
+    }
+]
