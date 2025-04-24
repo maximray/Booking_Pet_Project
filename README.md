@@ -99,9 +99,9 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 ```
 Инициализировать БД:
-    ```bash
+   ```bash
     alembic revision --autogenerate -m "comment"
-    ```
+   ```
 Применить миграцию:
 ```bash
     alembic upgrade head
