@@ -1,2 +1,2 @@
-# Booking_Pet_Project
-later
+# Сервис My_booking
+https://gunicorn.org/
