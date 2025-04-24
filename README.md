@@ -44,3 +44,120 @@
    ```bash
    git clone https://github.com/your-repo/my_booking.git
    cd my_booking
+
+3. Cоздать и активировать виртуальное окружение:
+
+Команды для установки виртуального окружения на Mac или Linux:
+   ```bash
+   python3 -m venv env
+   source env/bin/activate
+   ```
+Команды для Windows:
+   ```bash
+   python -m venv venv
+   source venv/Scripts/activate
+   ```
+Перейти в директорию app:
+   ```bash
+   cd /app
+   ```
+Создать файл .env по образцу:
+   ```bash
+   cp .env-local-example .env
+   ```
+Установить зависимости из файла requirements.txt:
+   ```bash
+   cd ..
+   pip install -r requirements.txt
+   ```
+
+Для создания миграций выполнить команду:
+   ```bash
+   alembic init migrations
+   ```
+В папку migrations в env файл вставьте следующий код:
+```python
+from logging.config import fileConfig
+
+from alembic import context
+from sqlalchemy import engine_from_config, pool
+
+from app.bookings.models import Booking
+from app.config import settings
+from app.database.db import Base
+from app.hotels.models import Hotel
+from app.rooms.models import Room
+from app.users.models import User
+
+
+config = context.config
+config.set_main_option('sqlalchemy.url', f'{settings.DATABASE_URL}?async_fallback=True')
+
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+target_metadata = Base.metadata
+```
+Инициализировать БД:
+    ```bash
+    alembic revision --autogenerate -m "comment"
+    ```
+Применить миграцию:
+```bash
+    alembic upgrade head
+```
+Запустить проект:
+```bash
+    uvicorn app.main:app --reload
+```
+Запустить Redis:
+```bash
+    redis-server.exe
+    redis-cli.exe
+```
+Запустить Celery:
+```bash
+    celery -A app.tasks.celery:celery worker --loglevel=INFO --pool=solo
+```
+Запустить Flower:
+```bash
+    celery -A app.tasks.tasks:celery flower
+```
+# Запуск в контейнерах Docker
+Находясь в главной директории проекта
+Создать файл .env-docker по образцу:
+   ```bash
+   cp .env-docker-example .env-docker
+```
+Запустить проект:
+```bash
+    docker-compose up -d --build
+```
+Примеры некоторых запросов API
+Регистрация пользователя:
+```
+   POST /users/register
+```
+Получение данных своей учетной записи:
+```
+   GET /users/me
+```
+Добавление бронирование:
+```
+   POST /bookings
+```
+Получение списка своих бронирований:
+```
+   GET /bookings
+```
+Получение списка отелей по нужной локации:
+```
+   GET /hotels/{location}
+```
+Получение списка доступных для бронирования комнат по заданным параметрам:
+```
+   GET /hotels/{hotel_id}/rooms
+```
+# Полный список запросов API находится в документации
+
+    
