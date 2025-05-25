@@ -42,7 +42,7 @@
 1. Установите [Docker](https://docs.docker.com/get-docker/) и [Redis](https://redis.io/docs/getting-started/)
 2. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/your-repo/my_booking.git
+   git clone https://github.com/maximray/Booking_Pet_Project
    cd my_booking
 
 3. Cоздать и активировать виртуальное окружение:
